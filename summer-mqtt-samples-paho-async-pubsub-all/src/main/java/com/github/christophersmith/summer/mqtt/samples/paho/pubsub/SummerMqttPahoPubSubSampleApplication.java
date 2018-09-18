@@ -13,27 +13,14 @@
  */
 package com.github.christophersmith.summer.mqtt.samples.paho.pubsub;
 
-import java.util.concurrent.CountDownLatch;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class SummerMqttPahoPubSubSampleApplication
 {
     public static void main(String[] args) throws InterruptedException
     {
-        ApplicationContext applicationContext = SpringApplication
-            .run(SummerMqttPahoPubSubSampleApplication.class, args);
-        CountDownLatch closeLatch = applicationContext.getBean(CountDownLatch.class);
-        closeLatch.await();
-    }
-
-    @Bean
-    public CountDownLatch closeLatch()
-    {
-        return new CountDownLatch(1);
+        SpringApplication.run(SummerMqttPahoPubSubSampleApplication.class, args);
     }
 }
