@@ -64,5 +64,6 @@
 	</dependencies>
 	<modules>
 		<module>summer-mqtt-samples-paho-async-pubsub-all</module>
+		<module>summer-mqtt-samples-paho-async-publish-only</module>
 	</modules>
 </project>
