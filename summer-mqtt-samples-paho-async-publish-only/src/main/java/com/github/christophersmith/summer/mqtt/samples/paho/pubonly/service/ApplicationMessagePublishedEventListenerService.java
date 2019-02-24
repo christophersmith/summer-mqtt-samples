@@ -18,22 +18,34 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Service;
 
+import com.github.christophersmith.summer.mqtt.core.event.MqttMessageDeliveredEvent;
 import com.github.christophersmith.summer.mqtt.core.event.MqttMessagePublishedEvent;
+import com.github.christophersmith.summer.mqtt.core.event.MqttMessageStatusEvent;
 
 @Service
 public class ApplicationMessagePublishedEventListenerService
-    implements ApplicationListener<MqttMessagePublishedEvent>
+    implements ApplicationListener<MqttMessageStatusEvent>
 {
     private static final Logger LOG = LoggerFactory
         .getLogger(ApplicationMessagePublishedEventListenerService.class);
 
     @Override
-    public void onApplicationEvent(MqttMessagePublishedEvent event)
+    public void onApplicationEvent(MqttMessageStatusEvent event)
     {
-        LOG.info(
-            String.format("Published Event - Client ID: %s, Correlation ID: %s, Message ID: %s",
-                event.getClientId(), event.getCorrelationId(),
-                String.valueOf(event.getMessageIdentifier())));
-
+        if (event instanceof MqttMessageDeliveredEvent)
+        {
+            MqttMessageDeliveredEvent deliveredEvent = (MqttMessageDeliveredEvent) event;
+            LOG.info(String.format("Message Delivered Event - Client ID: %s, Message ID: %s",
+                deliveredEvent.getClientId(),
+                String.valueOf(deliveredEvent.getMessageIdentifier())));
+        }
+        else if (event instanceof MqttMessagePublishedEvent)
+        {
+            MqttMessagePublishedEvent publishedEvent = (MqttMessagePublishedEvent) event;
+            LOG.info(String.format(
+                "Message Published Event - Client ID: %s, Correlation ID: %s, Message ID: %s",
+                event.getClientId(), publishedEvent.getCorrelationId(),
+                String.valueOf(publishedEvent.getMessageIdentifier())));
+        }
     }
 }

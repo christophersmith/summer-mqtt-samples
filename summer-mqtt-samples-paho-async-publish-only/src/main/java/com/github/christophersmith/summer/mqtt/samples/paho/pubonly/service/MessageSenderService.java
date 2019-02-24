@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.christophersmith.summer.mqtt.core.MqttQualityOfService;
 import com.github.christophersmith.summer.mqtt.core.service.MqttClientService;
 import com.github.christophersmith.summer.mqtt.core.util.MqttHeaderHelper;
 import com.github.christophersmith.summer.mqtt.samples.paho.pubonly.domain.AtomicIntegerMessage;
@@ -59,6 +60,7 @@ public class MessageSenderService
                 outboundMessageChannel
                     .send(MessageBuilder.withPayload(OBJECT_MAPPER.writeValueAsString(message))
                         .setHeader(MqttHeaderHelper.TOPIC, "inbound")
+                        .setHeader(MqttHeaderHelper.QOS, MqttQualityOfService.QOS_1)
                         .setHeader(MqttHeaderHelper.CORRELATION_ID, uuid).build());
             }
             catch (JsonProcessingException ex)
