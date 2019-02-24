@@ -7,3 +7,4 @@ Please note that this is always a work in progress and will be updated as time a
 ## With Async Paho Client
 
 1. [PUB/SUB with all features](summer-mqtt-samples-paho-async-pubsub-all)
+2. [PUBLISH only](summer-mqtt-samples-paho-async-publish-only)

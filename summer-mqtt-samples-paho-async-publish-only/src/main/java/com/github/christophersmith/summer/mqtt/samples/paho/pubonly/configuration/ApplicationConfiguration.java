@@ -57,7 +57,7 @@ public class ApplicationConfiguration
          * not using client-side persistence.
          */
         PahoAsyncMqttClientService service = new PahoAsyncMqttClientService("tcp://localhost:1883",
-            "TESTPUBSUB", MqttClientConnectionType.PUBLISHER, null);
+            "TESTPUBONLY", MqttClientConnectionType.PUBLISHER, null);
         /*
          * The default Paho MqttConnectOptions is being used here. We're only setting Clean Session
          * to true and a Will. For other Paho options, please see the Paho documentation.
